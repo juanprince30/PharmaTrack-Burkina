@@ -1,0 +1,72 @@
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="h1 mb-5 text-black"><b>Connexion</b></h2>
+      </div>
+
+      <div class="col-md-6">
+        <form (ngSubmit)="onSubmit()">
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+
+          <div class="p-3 p-lg-5 border">
+            <div class="form-group row">
+              <div class="col-md-12">
+                <label for="Username" class="text-black">
+                  Username <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  [(ngModel)]="username"
+                  required
+                  placeholder="Entrer votre Username"
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-12">
+                <label for="password" class="text-black">
+                  Mot de passe <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  [(ngModel)]="password"
+                  required
+                  placeholder="Entrer votre mot de passe"
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-lg-12">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-lg btn-block text-white"
+                >
+                  Se Connecter
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-md-6">
+        <img
+          src="images/doctor.jpg"
+          alt="image doctor"
+          class="img-fluid w-100"
+        />
+      </div>
+    </div>
+  </div>
+</div>

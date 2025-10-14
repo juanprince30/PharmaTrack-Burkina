@@ -1,0 +1,13 @@
+<button
+            class="btn text-white py-1"
+            [ngClass]="isAdded ? 'btn-success' : 'btn-primary'"
+            (click)="ajouterAuPanier()"
+        >
+            <i class="icons-btn d-inline-block cart me-1">
+            <span
+                [class.icon-shopping-cart]="!isAdded"
+                [class.icon-check]="isAdded"
+            ></span>
+            </i>
+            {{ isAdded ? 'Ajouté !' : 'Ajouter au panier' }}
+        </button>

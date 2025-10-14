@@ -1,0 +1,18 @@
+<div class="site-section">
+      <div class="container">
+        <div class="row">
+            <div class="title-section col-6 text-center">
+                <h2 class="text-uppercase">Medicaments Disponibles</h2>
+            </div>
+
+            <div *ngIf="est_admin" class="col-6 d-flex justify-content-end align-items-center" style="margin-bottom: 15px">
+                <a ><button class="btn btn-info">Ajouter un medicament</button></a>
+            </div>
+        </div>
+
+        <app-drugs-list></app-drugs-list>
+
+      </div>
+    </div>
+
+
