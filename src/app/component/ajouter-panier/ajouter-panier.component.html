@@ -2,11 +2,24 @@
             class="btn text-white py-1"
             [ngClass]="isAdded ? 'btn-success' : 'btn-primary'"
             (click)="ajouterAuPanier()"
+            *ngIf="is_enable"
         >
             <i class="icons-btn d-inline-block cart me-1">
             <span
                 [class.icon-shopping-cart]="!isAdded"
                 [class.icon-check]="isAdded"
+            ></span>
+            </i>
+            {{ isAdded ? 'Ajouté !' : 'Ajouter au panier' }}
+        </button>
+
+<button
+            class="btn btn-secondary text-white py-1"
+            *ngIf="!is_enable"
+        >
+            <i class="icons-btn d-inline-block cart me-1">
+            <span
+                class="icon-shopping-cart"
             ></span>
             </i>
             {{ isAdded ? 'Ajouté !' : 'Ajouter au panier' }}

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-ajouter-panier',
@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './ajouter-panier.component.css'
 })
 export class AjouterPanierComponent {
+  @Input() is_enable: Boolean = false; 
   isAdded = false;
 
   ajouterAuPanier() {

@@ -8,9 +8,29 @@
     <div class="col-sm-2">
         <p class="price">{{prix}} FCFA</p>
     </div>
-    <div class="col-sm-6 text-center">
-        <app-ajouter-panier></app-ajouter-panier>
+    <div class="col-sm-6 text-center" *ngIf="tague == 'Épuisé'">
+        <app-ajouter-panier [is_enable]=false></app-ajouter-panier>
     </div>
-
+    <div class="col-sm-6 text-center" *ngIf="tague == 'Expiré'">
+        <app-ajouter-panier [is_enable]=false></app-ajouter-panier>
+    </div>
+    <div class="col-sm-6 text-center" *ngIf="tague == 'À vendre'">
+        <app-ajouter-panier [is_enable]=true></app-ajouter-panier>
+    </div>
 </div>
-<p class="price" *ngIf="est_admin">{{prix}} FCFA</p>
+<div class="row" *ngIf="est_admin">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2">
+        <p class="price">{{prix}} FCFA</p>
+    </div>
+    <div class="col-sm-6 text-center">
+        
+        <button
+            class="btn text-white py-1 btn-primary" 
+        >
+            <i class="icons-btn d-inline-block cart me-1">
+            <span class="icon-edit"></span>
+            </i>
+        </button>
+    </div>
+</div>
