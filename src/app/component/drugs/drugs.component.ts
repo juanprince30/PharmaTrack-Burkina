@@ -10,12 +10,15 @@ import { AuthService } from '../../service/auth.service';
   templateUrl: './drugs.component.html',
   styleUrl: './drugs.component.css'
 })
-export class DrugsComponent {
+export class DrugsComponent { 
   @Input() tag: string = ''; 
   @Input() tague: string = '';    
   @Input() image: string = '';     
   @Input() titre: string = '';     
-  @Input() prix: string = ''; 
+  @Input() prix: string = '';
+  @Input() qte: number = 0;     
+  @Input() id: number = 0;
+
   
   est_connecter=false;
   est_admin=false;

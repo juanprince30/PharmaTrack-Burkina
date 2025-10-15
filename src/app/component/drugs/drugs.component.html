@@ -9,13 +9,13 @@
         <p class="price">{{prix}} FCFA</p>
     </div>
     <div class="col-sm-6 text-center" *ngIf="tague == 'Épuisé'">
-        <app-ajouter-panier [is_enable]=false></app-ajouter-panier>
+        <app-ajouter-panier [idMedoc]=id [qteMax]=qte [image]=image [prix]="prix" [nom]=titre [is_enable]=false></app-ajouter-panier>
     </div>
     <div class="col-sm-6 text-center" *ngIf="tague == 'Expiré'">
-        <app-ajouter-panier [is_enable]=false></app-ajouter-panier>
+        <app-ajouter-panier [idMedoc]=id [qteMax]=qte [image]=image [prix]="prix" [nom]=titre [is_enable]=false></app-ajouter-panier>
     </div>
     <div class="col-sm-6 text-center" *ngIf="tague == 'À vendre'">
-        <app-ajouter-panier [is_enable]=true></app-ajouter-panier>
+        <app-ajouter-panier [idMedoc]=id [qteMax]=qte [image]=image [prix]="prix" [nom]=titre [is_enable]=true></app-ajouter-panier>
     </div>
 </div>
 <div class="row" *ngIf="est_admin">

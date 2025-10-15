@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-6 col-lg-4 text-center item" *ngFor="let produit of produits">
-        <app-drugs *ngIf="produit.tague =='Épuisé'" tag="tag_finish" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} ></app-drugs>
-        <app-drugs *ngIf="produit.tague =='Expiré'" tag="tag_finish" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} ></app-drugs>
-        <app-drugs *ngIf="produit.tague =='À vendre'" tag="tag" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} ></app-drugs>
+        <app-drugs *ngIf="produit.tague =='Épuisé'" [id]=produit.id! [qte]=produit.quantity tag="tag_finish" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} ></app-drugs>
+        <app-drugs *ngIf="produit.tague =='Expiré'" [id]=produit.id! [qte]=produit.quantity tag="tag_finish" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} ></app-drugs>
+        <app-drugs *ngIf="produit.tague =='À vendre'" [id]=produit.id! [qte]=produit.quantity tag="tag" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} ></app-drugs>
     </div>
 </div>

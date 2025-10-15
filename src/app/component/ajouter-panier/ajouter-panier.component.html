@@ -1,7 +1,7 @@
 <button
             class="btn text-white py-1"
             [ngClass]="isAdded ? 'btn-success' : 'btn-primary'"
-            (click)="ajouterAuPanier()"
+            (click)="ajouterAuPanier(nom, prix,image,qteMax,idMedoc)"
             *ngIf="is_enable"
         >
             <i class="icons-btn d-inline-block cart me-1">
