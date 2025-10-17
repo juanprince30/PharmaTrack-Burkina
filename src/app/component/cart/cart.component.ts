@@ -37,4 +37,10 @@ export class CartComponent {
   getTotal() {
     return this.cartService.getTotal();
   }
+
+  acheter() {
+    this.cartService.acheter();
+    alert('Achat effectué avec succès !');
+  }
+
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { Drug } from '../models/drug';
 
 @Injectable({
@@ -31,6 +31,28 @@ export class DrugService {
       }))
     );
   }
+
+  editDrug(id: number, updatedDrug: Drug): Observable<Drug> {
+    return this.http.put<Drug>(`${this.apiUrl}/${id}`, updatedDrug).pipe(
+      map((drug: Drug) => ({
+        ...drug,
+        tague: this.defineTag(drug)
+      })),
+      // Ensuite, on vérifie les alertes après la mise à jour
+      tap((drug: Drug) => {
+        // Si la nouvelle quantité est > 10, on supprime les alertes existantes
+        if (drug.quantity > 10) {
+          this.http.get<any[]>('http://localhost:3000/alerts').subscribe((alerts) => {
+            const alertsToDelete = alerts.filter(a => a.medicineId === id);
+            alertsToDelete.forEach(alert => {
+              this.http.delete(`http://localhost:3000/alerts/${alert.id}`).subscribe();
+            });
+          });
+        }
+      })
+    );
+  }
+
 
   addDrug(drug: Drug): Observable<Drug> {
     return this.http.post<Drug>(this.apiUrl, drug);

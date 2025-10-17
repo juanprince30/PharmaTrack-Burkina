@@ -1,1 +1,72 @@
-<p>dashboard works!</p>
+<div class="container my-5">
+
+  <!-- Cards principales -->
+  <div class="row text-center mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card shadow-sm border-primary">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Chiffre d’affaires du jour</h5>
+          <h3 class="fw-bold">{{ revenueToday | currency:'XOF':'symbol':'1.0' }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card shadow-sm border-success">
+        <div class="card-body">
+          <h5 class="card-title text-success">Nombre de ventes Total</h5>
+          <h3 class="fw-bold">{{ salesCount }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card shadow-sm border-warning">
+        <div class="card-body">
+          <h5 class="card-title text-warning">Médicaments proches de la rupture</h5>
+          <h3 class="fw-bold">{{ alerts.length }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Liste des alertes -->
+  <div class="card shadow-sm mb-5">
+    <div class="card-header bg-warning text-dark fw-bold">
+      Alertes de stock
+    </div>
+    <div class="card-body">
+      <ul *ngIf="alerts.length > 0; else noAlert" class="list-group">
+        <li class="list-group-item" *ngFor="let alert of alerts">
+          {{ alert.message }}
+        </li>
+      </ul>
+      <ng-template #noAlert>
+        <p class="text-center text-muted mb-0">Aucune alerte pour le moment</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Graphiques -->
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white fw-bold">Ventes - par semaine</div>
+        <div class="card-body">
+          <canvas id="weeklyChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white fw-bold">Ventes - par mois</div>
+        <div class="card-body">
+          <canvas id="monthlyChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

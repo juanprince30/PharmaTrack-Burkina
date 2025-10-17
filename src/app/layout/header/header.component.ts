@@ -53,4 +53,5 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+  
 }

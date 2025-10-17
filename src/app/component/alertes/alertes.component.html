@@ -1,1 +1,17 @@
-<p>alertes works!</p>
+<div class="container mt-4">
+  <h3 class="mb-3">Alertes</h3>
+  <ul class="list-group">
+    <li *ngFor="let alert of alerts" class="list-group-item d-flex justify-content-between align-items-center">
+      {{ alert.message }}
+      <span class="badge" [ngClass]="{
+        'bg-warning': alert.type === 'warning',
+        'bg-danger': alert.type === 'danger'
+      }">
+        {{ alert.type | uppercase }}
+      </span>
+    </li>
+    <li *ngIf="alerts.length === 0" class="list-group-item text-center text-muted">
+      Aucune alerte
+    </li>
+  </ul>
+</div>

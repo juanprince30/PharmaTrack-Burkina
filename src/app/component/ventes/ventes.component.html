@@ -1,1 +1,44 @@
-<p>ventes works!</p>
+<div class="site-section">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-12">
+        <div class="site-blocks-table">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité Vendue</th>
+                <th>Date de la vente</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of ventes">
+                <td>
+                  <img [src]="item.drug?.image" alt="Image" class="img-fluid" />
+                </td>
+                <td>{{ item.drug?.name }}</td>
+                <td>{{ item.drug?.price | currency:'XOF':'symbol' }}</td>
+                <td>{{ item.quantitySold }}</td>
+                <td>{{ item.date }}</td>
+                <td>{{ item.total | currency:'XOF':'symbol' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-end">
+      <div class="col-md-12">
+        <h4 class="text-uppercase border-bottom pb-2">Total des Ventes</h4>
+        <div class="d-flex justify-content-between mb-4">
+          <span>Total</span>
+          <strong>{{ getTotal() |  currency:'XOF':'symbol':'1.0'  }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
