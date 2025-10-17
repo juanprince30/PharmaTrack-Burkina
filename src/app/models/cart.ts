@@ -1,6 +1,6 @@
 export interface Cart {
   id?: number;
-  idMedo:number;
+  idMedo:String;
   nom: string;
   prix: number;
   quantite: number;

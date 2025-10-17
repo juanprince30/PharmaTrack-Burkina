@@ -27,6 +27,7 @@
         
         <button
             class="btn text-white py-1 btn-primary" 
+            (click)="editer()"
         >
             <i class="icons-btn d-inline-block cart me-1">
             <span class="icon-edit"></span>
@@ -38,6 +39,7 @@
         
         <button
             class="btn text-white py-1 btn-danger" 
+            (click)="deleteDrug(id)"
         >
             <i class="icons-btn d-inline-block cart me-1">
             <span class="icon-trash"></span>

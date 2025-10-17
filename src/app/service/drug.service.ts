@@ -38,17 +38,18 @@ export class DrugService {
         ...drug,
         tague: this.defineTag(drug)
       })),
-      // Ensuite, on vérifie les alertes après la mise à jour
       tap((drug: Drug) => {
-        // Si la nouvelle quantité est > 10, on supprime les alertes existantes
-        if (drug.quantity > 10) {
-          this.http.get<any[]>('http://localhost:3000/alerts').subscribe((alerts) => {
-            const alertsToDelete = alerts.filter(a => a.medicineId === id);
-            alertsToDelete.forEach(alert => {
-              this.http.delete(`http://localhost:3000/alerts/${alert.id}`).subscribe();
-            });
+        this.http.get<any[]>('http://localhost:3000/alerts').subscribe((alerts) => {
+          const alertsToDelete = alerts.filter(a => Number(a.medicineId) === Number(id));
+          alertsToDelete.forEach(alert => {
+            if (alert.id !== undefined && alert.id !== null) {
+              this.http.delete(`http://localhost:3000/alerts/${alert.id}`).subscribe({
+                next: () => console.log(`Alerte ${alert.id} supprimée pour medicineId=${id}`),
+                error: (err) => console.error(`Erreur suppression alerte ${alert.id}:`, err)
+              });
+            }
           });
-        }
+        }, err => console.error('Erreur récupération alertes :', err));
       })
     );
   }
@@ -59,9 +60,22 @@ export class DrugService {
   }
 
 
-  deleteDrug(id: number): Observable<void> {
+  deleteDrug(id: String): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  searchDrugs(term: string): Observable<Drug[]> {
+    console.log(`${this.apiUrl}?name_like=${term}`)
+    return this.http.get<Drug[]>(`${this.apiUrl}?name_like=${term}`).pipe(
+      map((drugs: Drug[]) =>
+        drugs.map((drug) => ({
+          ...drug,
+          tague: this.defineTag(drug)
+        }))
+      )
+    );
+  }
+
 
   private defineTag(drug: Drug): string {
     const today = new Date();

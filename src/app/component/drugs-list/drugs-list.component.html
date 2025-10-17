@@ -1,7 +1,26 @@
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                <div class="input-group">
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Rechercher..." 
+                    aria-label="Recherche"
+                    [(ngModel)]="searchTerm"
+                    (input)="onSearch()"
+                    >
+                    <button class="btn btn-primary" type="button" (click)="onSearch()">
+                    <i class="icon-search"></i> 
+                    </button>
+                </div>
+                </div>
+            </div>
+        </div>
 <div class="row">
     <div class="col-sm-6 col-lg-4 text-center item" *ngFor="let produit of produits">
-        <app-drugs *ngIf="produit.tague =='Épuisé'" [id]=produit.id! [qte]=produit.quantity tag="tag_finish" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} ></app-drugs>
-        <app-drugs *ngIf="produit.tague =='Expiré'" [id]=produit.id! [qte]=produit.quantity tag="tag_finish" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} ></app-drugs>
-        <app-drugs *ngIf="produit.tague =='À vendre'" [id]=produit.id! [qte]=produit.quantity tag="tag" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} ></app-drugs>
+        <app-drugs *ngIf="produit.tague =='Épuisé'" [id]=produit.id! [qte]=produit.quantity tag="tag_finish" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} (drugDeleted)="onDrugDeleted($event)"></app-drugs>
+        <app-drugs *ngIf="produit.tague =='Expiré'" [id]=produit.id! [qte]=produit.quantity tag="tag_finish" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} (drugDeleted)="onDrugDeleted($event)"></app-drugs>
+        <app-drugs *ngIf="produit.tague =='À vendre'" [id]=produit.id! [qte]=produit.quantity tag="tag" tague={{produit.tague}} titre={{produit.name}} prix={{produit.price}} image={{produit.image}} (drugDeleted)="onDrugDeleted($event)"></app-drugs>
     </div>
 </div>

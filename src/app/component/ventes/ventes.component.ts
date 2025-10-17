@@ -27,16 +27,23 @@ export class VentesComponent implements OnInit {
   loadVentesWithDrugs(): void {
     this.drugService.getAllDrugs().subscribe(drugs => {
       this.drugs = drugs;
-      console.log(this.drugs)
+      console.log(this.drugs);
 
       this.saleService.getAllSales().subscribe(ventes => {
         // Associer le médicament correspondant à chaque vente
         this.ventes = ventes.map(v => ({
           ...v,
-          drug: this.drugs.find(d => d.id == v.medicineId)
+          drug: this.drugs.find(d => (d.id) === v.medicineId)
         }));
 
-        console.log('Ventes récupérées avec médicaments :', this.ventes);
+        // Trier les ventes par date, du plus récent au plus ancien
+        this.ventes.sort((a, b) => {
+          const dateA = new Date(a.date); // assure-toi que "date" existe et est en format compatible
+          const dateB = new Date(b.date);
+          return dateB.getTime() - dateA.getTime(); // plus récent d'abord
+        });
+
+        console.log('Ventes triées par date :', this.ventes);
       });
     });
   }

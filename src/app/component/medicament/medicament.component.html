@@ -6,7 +6,7 @@
             </div>
 
             <div *ngIf="est_admin" class="col-6 d-flex justify-content-end align-items-center" style="margin-bottom: 15px">
-                <a ><button class="btn btn-info">Ajouter un medicament</button></a>
+                <a ><button [routerLink]="['/medicaments/add']" class="btn btn-info">Ajouter un medicament</button></a>
             </div>
         </div>
 

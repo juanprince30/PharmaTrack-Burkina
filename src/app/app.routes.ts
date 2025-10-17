@@ -10,6 +10,8 @@ import { authGuard } from './guard/auth.guard';
 import { LoginComponent } from './component/login/login.component';
 import { guestGuard } from './guard/guest.guard';
 import { MedicamentComponent } from './component/medicament/medicament.component';
+import { AddMedicamentComponent } from './component/add-medicament/add-medicament.component';
+import { EditMedicamentComponent } from './component/edit-medicament/edit-medicament.component';
 
 export const routes: Routes = [
     {
@@ -29,8 +31,25 @@ export const routes: Routes = [
     },
     {
         path: 'medicaments',
-        component: MedicamentComponent,
-        canActivate: [authGuard],
+        children:[
+            {
+                path:'',
+                component: MedicamentComponent,
+                canActivate: [authGuard],
+            },
+            {
+                path:'add',
+                component: AddMedicamentComponent,
+                canActivate: [authGuard],
+                data: { adminOnly: true },
+            },
+            {
+                path:'edit/:id',
+                component: EditMedicamentComponent,
+                canActivate: [authGuard],
+                data: { adminOnly: true },
+            }
+        ]
     },
     {
         path: 'cart',

@@ -20,14 +20,14 @@ export class AjouterPanierComponent implements OnInit {
   @Input() nom: string = '';    
   @Input() image: string = '';     
   @Input() prix: string = ''; 
-  @Input() idMedoc: number = 0;     
+  @Input() idMedoc: String = '';     
   @Input() qteMax: number = 0; 
 
   isAdded = false;
 
   constructor(private cartService: CartService) {}
 
-  ajouterAuPanier(nom:string, prix:string, image:string, qteMax:number, idMedoc:number) {
+  ajouterAuPanier(nom:string, prix:string, image:string, qteMax:number, idMedoc:String) {
     const item: Cart = {
       nom: nom,
       prix: Number(prix),

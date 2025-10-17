@@ -1,9 +1,11 @@
+import { Vente } from './../../models/vente';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Alerte } from '../../models/alerte';
 import { VenteService } from '../../service/vente.service';
 import { AlerteService } from '../../service/alerte.service';
 import { Chart, registerables } from 'chart.js';
+import { count } from 'rxjs';
 Chart.register(...registerables);
 
 
@@ -15,6 +17,8 @@ Chart.register(...registerables);
 })
 export class DashboardComponent implements OnInit {
   alerts: Alerte[] = [];
+  ventes: Vente[] = [];
+  revenueTotal: number = 0;
   revenueToday: number = 0;
   salesCount: number = 0;
   weeklySales: { date: string, total: number }[] = [];
@@ -49,6 +53,22 @@ export class DashboardComponent implements OnInit {
   loadSalesData(): void {
     this.saleService.getTodayRevenue().subscribe(rev => this.revenueToday = rev);
     this.saleService.getSalesCount().subscribe(count => this.salesCount = count);
+    this.saleService.getAllSales().subscribe(ventes => {
+        // Associer le médicament correspondant à chaque vente
+        this.ventes = ventes.map(v => ({
+          ...v,
+        }));
+
+        this.ventes.sort((a, b) => {
+          const dateA = new Date(a.date); 
+          const dateB = new Date(b.date);
+          return dateB.getTime() - dateA.getTime();
+        });
+
+        this.getTotal();
+
+        console.log('Ventes triées par date :', this.ventes);
+      });
 
     this.saleService.getWeeklySales().subscribe(data => {
       this.weeklySales = data;
@@ -106,4 +126,9 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+  getTotal(): void {
+    this.revenueTotal = this.ventes.reduce((acc, v) => acc + v.total, 0);
+  }
+
 }

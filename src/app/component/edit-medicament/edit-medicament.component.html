@@ -1,0 +1,53 @@
+<form (ngSubmit)="onSubmit()" #drugForm="ngForm">
+  <div class="row mt-5">
+    <div class="col-md-6 mb-5 mb-md-0">
+      <h2 class="h3 mb-3 text-black ps-5">Modifier Médicament</h2>
+      <div class="p-3 p-lg-5 border rounded-3 shadow-sm">
+        <div class="form-group mb-3">
+          <label class="text-black">Nom Médicament <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" name="name" [(ngModel)]="drug.name" required placeholder="Nom du médicament" />
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-black">Catégorie <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" name="category" [(ngModel)]="drug.category" required placeholder="Catégorie du médicament" />
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-black">Image du Médicament <span class="text-danger">*</span></label>
+          <input type="file" class="form-control" (change)="onImageSelected($event)" accept="image/*" required />
+        </div>
+
+        <div *ngIf="imagePreview" class="text-center mb-3">
+          <img [src]="imagePreview" alt="Aperçu" class="img-fluid rounded shadow-sm" width="150" />
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="text-black">Date d'expiration <span class="text-danger">*</span></label>
+          <input type="date" class="form-control" name="expirationDate" [(ngModel)]="drug.expirationDate" required />
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="p-3 p-lg-5 border rounded-3 shadow-sm">
+        <h2 class="h4 mb-3 text-black">Stock</h2>
+
+        <div class="form-group mb-3">
+          <label class="text-black">Quantité <span class="text-danger">*</span></label>
+          <input type="number" class="form-control" name="quantity" [(ngModel)]="drug.quantity" required min="0" placeholder="Quantité" />
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="text-black">Prix unitaire <span class="text-danger">*</span></label>
+          <input type="number" class="form-control" name="price" [(ngModel)]="drug.price" required min="1" placeholder="Prix unitaire" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="drugForm.invalid">
+          Enregistrer
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+

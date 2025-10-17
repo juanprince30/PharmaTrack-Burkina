@@ -1,6 +1,6 @@
 export interface Vente {
   id?: string;
-  medicineId: number;
+  medicineId: String;
   quantitySold: number;
   date: string;
   total: number;
